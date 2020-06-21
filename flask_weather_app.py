@@ -12,7 +12,7 @@ def home():
         page = requests.get(url)
         
         soup = BeautifulSoup(page.content,'html.parser')
-        price = soup.find("div", {"class": "_3qQ9m1"})
+        price = soup.find("div", {"class": "_3qQ9m1"}).text
         price = price[1:]
     
     # This is used to remove the , in between the prices to make it a number
