@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 #import requests, time, smtplib
 from datetime import datetime
-from send_email import send_email
+from send_mail import send_mail
 app = Flask(__name__)
 
 @app.route("/", methods=['GET','POST'])
