@@ -8,10 +8,17 @@ app = Flask(__name__)
 def home():
     if request.method == 'POST':
         url = request.form.get('URL')
+        
         #url = "https://www.timeanddate.com/weather/india/"+city_name+"/ext"
+        page = requests.get(url).text
+        soup = BeautifulSoup(page.content,'html.parser')
+        
+    # print(soup.prettify())
+
+        product_name = soup.find('h1').text.strip()
         page = requests.get(url)
         
-        soup = BeautifulSoup(page.content,'html.parser')
+      
         price = soup.find("div", {"class": "_3qQ9m1"}).text
         price = price[1:]
     
@@ -24,7 +31,7 @@ def home():
     
 
         
-        return render_template("flask_weather_app.html", price=price )
+        return render_template("flask_weather_app.html", price=price,product_name=product_name )
     return render_template("flask_weather_app.html")
 
 app.run(debug=True)
